@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <meta name="theme-color" content="#162c63">
+    <meta name="description" content="WebSwan Calendar, Tasks & Social Links - All in One PWA">
+    <title>WebSwan Calendar, Task & Links</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon512.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary-dark: #162c63;
+            --primary-light: #97f0eb;
+            --background-light: #a6f7f5;
+            --white: #ffffff;
+            --gray-light: #f3f4f6;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --accent: #4d8af0;
+            --sudoku-color: #34a853;
+            --puzzle-color: #FF6B6B;
+            --memory-color: #7C3AED;
+            --github-color: #181717;
+            --linkedin: #0077b5;
+            --instagram: #e4405f;
+            --facebook: #1877f2;
+            --youtube: #ff0000;
+            --meet-founder: #c4302b;
+            --audit: #10b981;
+            --advertising: #8b5cf6;
+            --referral: #f59e0b;
+            --brandhub: #ec4899;
+            --webswan: #06b6d4;
+            --upwork: #6fda44;
+            --crm: #3b82f6;
+            --netlify: #00c7b7;
+            --custom-link: #8b5cf6;
+            --review: #06b6d4;
+            --seo-video: #8b5cf6;
+            --designer-video: #ec4899;
+            --network-intro: #3b82f6;
+            --translator: #8b5cf6;
+            --admin: #3b82f6;
+            --genesis: #7c3aed;
+            --affiliate-links: #e91e63;
+            --google-review: #4285F4;
+            --pwa-price: #34a853;
+            --ad-campaign-price: #FF6B35;
+            --credit-florida: #3b82f6;
+            --multisite-builder: #9C27B0;
+            --deepseek-chat: #FF4081;
+            --web-analysis: #FF6B6B;
+            --web-analysis-result: #FF8C42;
+            --analysis-overview: #20B2AA;
+            --prospect-tools: #FF9800;
+            --travel-pwa: #00BFFF;
+            --google-link-review: #34A853;
+            --broken-link: #DC3545;
+            --dataannotation: #4285F4;
+            --cookie-tester: #d61b06;
+            --cookie-secret: #14395d;
+            --invoice: #667eea;
+            --genesis-new: #8B5CF6;
+            --developer-coding: #F97316;
+            --webswan-games: #7C3AED;
+            --codepen-link: #000000;
+            --surfer-seo: #ff4d4d;
+            --business-email: #2c3e66;
+            --cpanel-color: #FF9C00;
+            --backmarket: #05C29A;
+            --awin: #00AEEF;
+            --real-estate-demo: #E67E22;
+            --coursera-color: #2A73FF;
+            --ein-color: #1E3A8A;
+            --bizee-color: #0F766E;
+            --admin-button-color: #7C3AED;
+            --ein-number-color: #0D9488;
+            --airbnb-color: #FF5A5F;
+            --video-creator-color: #FF3366;
+            --states-compliance-color: #2E7D32;
+            --language-gallery: #A855F7;
+            --broken-link-test: #e74c3c;
+            --portfolio-color: #f59e0b;
+            --avatar-ad-color: #FF6B6B;
+            --openclaw-color: #FF6B35;
+        }
+        
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: var(--background-light); 
+            min-height: 100vh;
+            width: 100%;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .app-container { 
+            max-width: 500px; 
+            width: 100%;
+            margin: 0 auto; 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            background: var(--white); 
+            overflow: hidden; 
+            opacity: 0; 
+            transition: opacity 0.5s ease; 
+            box-shadow: 0 0 30px rgba(0,0,0,0.08);
+            display: none;
+        }
+        
+        @media (max-width: 520px) {
+            .app-container {
+                margin: 0;
+                max-width: 100%;
+                border-radius: 0;
+            }
+        }
+        
+        .app-container.loaded { opacity: 1; }
+        .app-container.unlocked { display: flex; }
+        
+        /* ===== LOCK SCREEN STYLES ===== */
+        .lock-screen {
+            max-width: 500px;
+            width: 100%;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0d1b3e 0%, #162c63 50%, #1a3a6b 100%);
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .lock-screen::before {
+            content: '🦢';
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.05;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: swanFloat 6s ease-in-out infinite;
+        }
+        
+        .lock-screen .lock-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: lockPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes lockPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .lock-screen h1 {
+            color: white;
+            font-size: clamp(1.5rem, 6vw, 2.2rem);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .lock-screen p {
+            color: rgba(255,255,255,0.7);
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            margin-bottom: 30px;
+        }
+        
+        .lock-screen .lock-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 36px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: relative;
+        }
+        
+        .lock-screen .lock-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.05);
+            border-color: rgba(255,255,255,0.5);
+        }
+        
+        .lock-screen .lock-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .lock-screen .progress-ring {
+            width: 200px;
+            height: 6px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 10px;
+            margin: 25px 0 10px;
+            overflow: hidden;
+        }
+        
+        .lock-screen .progress-ring .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FF6B35, #FFD700);
+            border-radius: 10px;
+            transition: width 0.4s ease;
+            width: 0%;
+        }
+        
+        .lock-screen .hint-text {
+            color: rgba(255,255,255,0.3);
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+        
+        .lock-screen .lock-status {
+            color: rgba(255,255,255,0.5);
+            font-size: 13px;
+            margin-top: 5px;
+            min-height: 20px;
+        }
+        
+        /* ===== KEY MODAL STYLES ===== */
+        .key-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .key-modal-overlay.active {
+            display: flex;
+        }
+        
+        .key-modal {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-radius: 30px;
+            padding: 40px 35px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            border: 2px solid rgba(255,215,0,0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .key-modal::before {
+            content: '🔑';
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.05;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .key-modal .key-icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+            display: block;
+            animation: keyShake 3s ease-in-out infinite;
+        }
+        
+        @keyframes keyShake {
+            0%, 100% { transform: rotate(0deg); }
+            5% { transform: rotate(-15deg); }
+            10% { transform: rotate(15deg); }
+            15% { transform: rotate(0deg); }
+        }
+        
+        .key-modal h2 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .key-modal p {
+            color: rgba(255,255,255,0.6);
+            font-size: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .key-modal .key-btn {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 3px solid rgba(255,215,0,0.3);
+            background: rgba(255,215,0,0.1);
+            color: #FFD700;
+            font-size: 32px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .key-modal .key-btn:hover {
+            background: rgba(255,215,0,0.2);
+            transform: scale(1.05);
+            border-color: rgba(255,215,0,0.6);
+        }
+        
+        .key-modal .key-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .key-modal .key-progress {
+            width: 100%;
+            height: 5px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            margin: 20px 0 10px;
+            overflow: hidden;
+        }
+        
+        .key-modal .key-progress .key-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+            border-radius: 10px;
+            transition: width 0.4s ease;
+            width: 0%;
+        }
+        
+        .key-modal .key-status {
+            color: rgba(255,255,255,0.4);
+            font-size: 12px;
+            min-height: 18px;
+        }
+        
+        .key-modal .key-hint {
+            color: rgba(255,255,255,0.2);
+            font-size: 11px;
+            margin-top: 12px;
+            letter-spacing: 0.5px;
+        }
+        
+        /* ===== REST OF ORIGINAL STYLES ===== */
+        .header { 
+            background: linear-gradient(135deg, #a6f7f5 0%, #97f0eb 100%); 
+            color: var(--primary-dark); 
+            padding: 15px 20px; 
+            text-align: center; 
+            position: relative; 
+            width: 100%;
+        }
+        
+        .swan-cloud-container { 
+            position: relative; 
+            height: 70px; 
+            margin-bottom: 5px; 
+            overflow: hidden; 
+        }
+        
+        .emoji-swan { 
+            position: absolute; 
+            font-size: 45px; 
+            top: 10px; 
+            right: -100px; 
+            animation: swanSwimRightToLeft 20s linear infinite, swanFloat 3s ease-in-out infinite; 
+            z-index: 10; 
+        }
+        
+        @keyframes swanSwimRightToLeft { 0% { right: -100px; } 100% { right: calc(100% + 100px); } }
+        @keyframes swanFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
+        
+        .header h1 { font-size: clamp(1.1rem, 5vw, 22px); margin-bottom: 4px; background: linear-gradient(45deg, var(--primary-dark), var(--webswan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .header p { font-size: clamp(0.7rem, 3vw, 13px); opacity: 0.8; }
+        
+        .header-search { margin: 10px 0 4px; position: relative; width: 100%; }
+        .header-search input { 
+            width: 100%; 
+            padding: 9px 14px 9px 36px; 
+            border-radius: 20px; 
+            border: 2px solid rgba(22,44,99,0.2); 
+            background: rgba(255,255,255,0.85);
+            font-size: clamp(0.8rem, 3vw, 0.9rem);
+        }
+        .header-search .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--primary-dark); }
+        
+        .search-results-overlay { 
+            display: none; 
+            position: absolute; 
+            top: 100%; 
+            left: 0; 
+            right: 0; 
+            background: white; 
+            border-radius: 14px; 
+            box-shadow: 0 8px 24px rgba(0,0,0,0.14); 
+            z-index: 9999; 
+            max-height: 320px; 
+            overflow-y: auto; 
+        }
+        .search-results-overlay.visible { display: block; }
+        
+        .social-section { 
+            padding: 20px; 
+            background: linear-gradient(135deg, rgba(166,247,245,0.1) 0%, rgba(151,240,235,0.1) 100%); 
+            border-bottom: 1px solid rgba(151,240,235,0.3);
+            width: 100%;
+        }
+        
+        .section-title { 
+            font-size: clamp(1rem, 4vw, 18px); 
+            font-weight: 700; 
+            color: var(--primary-dark); 
+            margin-bottom: 20px; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            padding-bottom: 12px; 
+            border-bottom: 2px solid var(--primary-light); 
+        }
+        
+        .section-title i { color: white; background: linear-gradient(135deg, var(--primary-dark), var(--primary-light)); width: 38px; height: 38px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+        
+        .social-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+            gap: 12px; 
+        }
+        
+        @media (max-width: 400px) { 
+            .social-grid { 
+                grid-template-columns: 1fr; 
+            } 
+        }
+        
+        .social-card { 
+            background: white; 
+            border-radius: 16px; 
+            padding: 16px; 
+            text-decoration: none; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            transition: all 0.3s ease; 
+            border: 2px solid #e5e7eb; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
+            position: relative; 
+            overflow: hidden; 
+            text-align: center;
+        }
+        
+        .social-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+        
+        .social-card.openclaw-card::before { background: var(--openclaw-color); }
+        .social-card.portfolio-card::before { background: var(--portfolio-color); }
+        .social-card.broken-link-test-card::before { background: var(--broken-link-test); }
+        .social-card.states-compliance-card::before { background: var(--states-compliance-color); }
+        .social-card.video-creator-card::before { background: var(--video-creator-color); }
+        .social-card.ein-number-card::before { background: var(--ein-number-color); }
+        .social-card.ein-card::before { background: var(--ein-color); }
+        .social-card.bizee-card::before { background: var(--bizee-color); }
+        .social-card.admin-card::before { background: var(--admin-button-color); }
+        .social-card.swan-language-card::before { background: var(--translator); }
+        .social-card.swan-pricing-card::before { background: var(--ad-campaign-price); }
+        .social-card.airbnb-card::before { background: var(--airbnb-color); }
+        .social-card.sudoku-card::before { background: var(--sudoku-color); }
+        .social-card.puzzle-card::before { background: var(--puzzle-color); }
+        .social-card.memory-card::before { background: var(--memory-color); }
+        .social-card.github-card::before { background: var(--github-color); }
+        .social-card.surfer-seo::before { background: var(--surfer-seo); }
+        .social-card.codepen-link::before { background: #000000; }
+        .social-card.genesis-new::before { background: var(--genesis-new); }
+        .social-card.invoice::before { background: var(--invoice); }
+        .social-card.cookie-secret::before { background: var(--cookie-secret); }
+        .social-card.cookie-tester::before { background: var(--cookie-tester); }
+        .social-card.dataannotation::before { background: var(--dataannotation); }
+        .social-card.web-analysis::before { background: var(--web-analysis); }
+        .social-card.web-analysis-result::before { background: var(--web-analysis-result); }
+        .social-card.broken-link::before { background: var(--broken-link); }
+        .social-card.multisite-builder::before { background: var(--multisite-builder); }
+        .social-card.deepseek-chat::before { background: var(--deepseek-chat); }
+        .social-card.travel-pwa::before { background: var(--travel-pwa); }
+        .social-card.prospect-tools::before { background: var(--prospect-tools); }
+        .social-card.google-link-review::before { background: var(--google-link-review); }
+        .social-card.genesis::before { background: var(--genesis); }
+        .social-card.affiliate-links::before { background: var(--affiliate-links); }
+        .social-card.pwa-price::before { background: var(--pwa-price); }
+        .social-card.ad-campaign-price::before { background: var(--ad-campaign-price); }
+        .social-card.google-review::before { background: var(--google-review); }
+        .social-card.crm::before { background: var(--crm); }
+        .social-card.upwork::before { background: var(--upwork); }
+        .social-card.linkedin::before { background: var(--linkedin); }
+        .social-card.instagram::before { background: linear-gradient(45deg, #405DE6, #833AB4, #E1306C); }
+        .social-card.youtube-channel::before { background: var(--youtube); }
+        .social-card.meet-founder::before { background: var(--meet-founder); }
+        .social-card.facebook-business::before { background: var(--facebook); }
+        .social-card.facebook-personal::before { background: var(--facebook); }
+        .social-card.audit::before { background: var(--audit); }
+        .social-card.advertising::before { background: var(--advertising); }
+        .social-card.referral::before { background: var(--referral); }
+        .social-card.brandhub::before { background: var(--brandhub); }
+        .social-card.webswan-network::before { background: var(--webswan); }
+        .social-card.webswan-digital::before { background: linear-gradient(45deg, var(--primary-dark), var(--primary-light)); }
+        .social-card.translator::before { background: var(--translator); }
+        .social-card.admin::before { background: var(--admin); }
+        .social-card.netlify-card::before { background: var(--netlify); }
+        .social-card.credit-florida::before { background: var(--credit-florida); }
+        .social-card.developer-coding::before { background: var(--developer-coding); }
+        .social-card.webswan-games::before { background: var(--webswan-games); }
+        .social-card.business-email::before { background: var(--business-email); }
+        .social-card.cpanel-card::before { background: var(--cpanel-color); }
+        .social-card.backmarket::before { background: var(--backmarket); }
+        .social-card.awin-affiliate::before { background: var(--awin); }
+        .social-card.real-estate-demo::before { background: var(--real-estate-demo); }
+        .social-card.coursera-card::before { background: var(--coursera-color); }
+        .social-card.language-gallery-card::before { background: var(--language-gallery); }
+        .social-card.avatar-ad-card::before { background: var(--avatar-ad-color); }
+        
+        .social-card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); border-color: var(--primary-light); }
+        
+        .social-icon { 
+            font-size: 28px; 
+            margin-bottom: 12px; 
+            width: 56px; 
+            height: 56px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: white; 
+        }
+        
+        .social-card.openclaw-card .social-icon { background: var(--openclaw-color); }
+        .social-card.portfolio-card .social-icon { background: var(--portfolio-color); }
+        .social-card.broken-link-test-card .social-icon { background: var(--broken-link-test); }
+        .social-card.states-compliance-card .social-icon { background: var(--states-compliance-color); }
+        .social-card.video-creator-card .social-icon { background: var(--video-creator-color); }
+        .social-card.swan-language-card .social-icon { background: var(--translator); }
+        .social-card.swan-pricing-card .social-icon { background: var(--ad-campaign-price); }
+        .social-card.airbnb-card .social-icon { background: var(--airbnb-color); }
+        .social-card.ein-number-card .social-icon { background: var(--ein-number-color); }
+        .social-card.ein-card .social-icon { background: var(--ein-color); }
+        .social-card.bizee-card .social-icon { background: var(--bizee-color); }
+        .social-card.admin-card .social-icon { background: var(--admin-button-color); }
+        .social-card.language-gallery-card .social-icon { background: var(--language-gallery); }
+        .social-card.avatar-ad-card .social-icon { background: var(--avatar-ad-color); }
+        
+        .social-card.sudoku-card .social-icon { background: var(--sudoku-color); }
+        .social-card.puzzle-card .social-icon { background: var(--puzzle-color); }
+        .social-card.memory-card .social-icon { background: var(--memory-color); }
+        .social-card.github-card .social-icon { background: var(--github-color); }
+        .social-card.surfer-seo .social-icon { background: var(--surfer-seo); }
+        .social-card.codepen-link .social-icon { background: #000000; }
+        .social-card.genesis-new .social-icon { background: var(--genesis-new); }
+        .social-card.invoice .social-icon { background: var(--invoice); }
+        .social-card.cookie-secret .social-icon { background: var(--cookie-secret); }
+        .social-card.cookie-tester .social-icon { background: var(--cookie-tester); }
+        .social-card.dataannotation .social-icon { background: var(--dataannotation); }
+        .social-card.web-analysis .social-icon { background: var(--web-analysis); }
+        .social-card.web-analysis-result .social-icon { background: var(--web-analysis-result); }
+        .social-card.broken-link .social-icon { background: var(--broken-link); }
+        .social-card.multisite-builder .social-icon { background: var(--multisite-builder); }
+        .social-card.deepseek-chat .social-icon { background: var(--deepseek-chat); }
+        .social-card.travel-pwa .social-icon { background: var(--travel-pwa); }
+        .social-card.prospect-tools .social-icon { background: var(--prospect-tools); }
+        .social-card.google-link-review .social-icon { background: var(--google-link-review); }
+        .social-card.genesis .social-icon { background: var(--genesis); }
+        .social-card.affiliate-links .social-icon { background: var(--affiliate-links); }
+        .social-card.pwa-price .social-icon { background: var(--pwa-price); }
+        .social-card.ad-campaign-price .social-icon { background: var(--ad-campaign-price); }
+        .social-card.google-review .social-icon { background: var(--google-review); }
+        .social-card.crm .social-icon { background: var(--crm); }
+        .social-card.upwork .social-icon { background: var(--upwork); }
+        .social-card.linkedin .social-icon { background: var(--linkedin); }
+        .social-card.instagram .social-icon { background: linear-gradient(45deg, #405DE6, #833AB4, #E1306C); }
+        .social-card.youtube-channel .social-icon { background: var(--youtube); }
+        .social-card.meet-founder .social-icon { background: var(--meet-founder); }
+        .social-card.facebook-business .social-icon { background: var(--facebook); }
+        .social-card.facebook-personal .social-icon { background: var(--facebook); }
+        .social-card.audit .social-icon { background: var(--audit); }
+        .social-card.advertising .social-icon { background: var(--advertising); }
+        .social-card.referral .social-icon { background: var(--referral); }
+        .social-card.brandhub .social-icon { background: var(--brandhub); }
+        .social-card.webswan-network .social-icon { background: var(--webswan); }
+        .social-card.webswan-digital .social-icon { background: linear-gradient(45deg, var(--primary-dark), var(--primary-light)); }
+        .social-card.translator .social-icon { background: var(--translator); }
+        .social-card.admin .social-icon { background: var(--admin); }
+        .social-card.netlify-card .social-icon { background: var(--netlify); }
+        .social-card.credit-florida .social-icon { background: var(--credit-florida); }
+        .social-card.developer-coding .social-icon { background: var(--developer-coding); }
+        .social-card.webswan-games .social-icon { background: var(--webswan-games); }
+        .social-card.business-email .social-icon { background: var(--business-email); }
+        .social-card.cpanel-card .social-icon { background: var(--cpanel-color); }
+        .social-card.backmarket .social-icon { background: var(--backmarket); }
+        .social-card.awin-affiliate .social-icon { background: var(--awin); }
+        .social-card.real-estate-demo .social-icon { background: var(--real-estate-demo); }
+        .social-card.coursera-card .social-icon { background: var(--coursera-color); }
+        
+        .social-name { font-weight: 700; color: var(--text-dark); margin-bottom: 6px; text-align: center; font-size: clamp(0.75rem, 3vw, 15px); }
+        .social-desc { font-size: clamp(0.6rem, 2.5vw, 11px); color: var(--text-light); text-align: center; line-height: 1.4; }
+        
+        .calendar-nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: white; border-bottom: 1px solid rgba(151,240,235,0.3); flex-wrap: wrap; gap: 10px; }
+        .nav-btn { background: none; border: none; font-size: 18px; color: var(--primary-dark); cursor: pointer; padding: 8px 12px; border-radius: 8px; }
+        .current-month { font-size: clamp(0.9rem, 4vw, 18px); font-weight: 700; color: var(--primary-dark); }
+        .calendar { padding: 20px; background: white; flex: 1; overflow-y: auto; }
+        .weekdays { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-weight: 600; color: var(--text-light); margin-bottom: 10px; font-size: clamp(0.6rem, 2.5vw, 12px); }
+        .days-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+        .day { aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer; background: white; border: 2px solid rgba(151,240,235,0.3); position: relative; font-size: clamp(0.7rem, 3vw, 14px); }
+        .day.today { background: linear-gradient(135deg, var(--primary-dark), var(--primary-light)); color: white; }
+        .day.selected { background: linear-gradient(135deg, var(--accent), #8bc6fc); color: white; }
+        .day.other-month { color: #9ca3af; background: #f9fafb; }
+        .task-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); position: absolute; bottom: 8px; }
+        
+        .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+        .modal.active { display: flex; }
+        .modal-content { background: white; border-radius: 20px; padding: 24px; width: 90%; max-width: 400px; max-height: 80vh; overflow-y: auto; }
+        
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; margin-bottom: 6px; font-weight: 600; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; }
+        
+        .btn { flex: 1; padding: 12px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary-dark), var(--primary-light)); color: white; }
+        .btn-secondary { background: var(--gray-light); color: var(--text-light); }
+        
+        .footer { background: linear-gradient(135deg, var(--primary-dark), var(--primary-light)); color: white; padding: 20px; text-align: center; width: 100%; }
+        .footer-nav { display: flex; justify-content: space-around; margin-top: 15px; gap: 10px; flex-wrap: wrap; }
+        .footer-btn { background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.3); color: white; padding: 12px; border-radius: 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 80px; }
+        .footer-btn.active { opacity: 1; background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.5); }
+        .footer-btn i { font-size: clamp(1.2rem, 5vw, 22px); }
+        .btn-label { font-size: clamp(0.6rem, 2.5vw, 11px); font-weight: 600; }
+        
+        .tab-pane { display: none; }
+        .tab-pane.active { display: block; }
+        
+        .loading { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--background-light); display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s; }
+        .loading.hidden { opacity: 0; visibility: hidden; }
+        .loading::after { content: '🦢'; font-size: 48px; animation: loadingSpin 2s ease-in-out infinite; }
+        @keyframes loadingSpin { 0%, 100% { transform: rotate(0deg) scale(1); } 50% { transform: rotate(180deg) scale(1.1); } }
+        
+        .notification-toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, var(--primary-dark), var(--primary-light)); color: white; padding: 12px 20px; border-radius: 25px; z-index: 1000; animation: slideUp 0.4s ease; white-space: nowrap; }
+        @keyframes slideUp { from { transform: translateX(-50%) translateY(20px); opacity: 0; } to { transform: translateX(-50%) translateY(0); opacity: 1; } }
+        
+        .empty-state { text-align: center; padding: 20px; color: var(--text-light); }
+        .copy-link-card, .video-link-card { background: white; border-radius: 12px; padding: 15px; margin-bottom: 12px; border: 2px solid rgba(151,240,235,0.3); }
+        .copy-link-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+        .copy-link-content { display: flex; align-items: center; gap: 10px; margin-top: 8px; flex-wrap: wrap; }
+        .link-display { flex: 1; padding: 10px 12px; background: var(--gray-light); border-radius: 8px; font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    </style>
+</head>
+<body>
+
+<!-- ===== LOCK SCREEN ===== -->
+<div class="lock-screen" id="lockScreen">
+    <div class="lock-icon">🔐</div>
+    <h1>WebSwan Secure</h1>
+    <p>Tap the lock to unlock<br>then use your key to enter</p>
+    
+    <button class="lock-btn" id="lockBtn">
+        <i class="fas fa-lock"></i>
+    </button>
+    
+    <div class="progress-ring">
+        <div class="progress-fill" id="lockProgress"></div>
+    </div>
+    <div class="lock-status" id="lockStatus">🔒 tap to unlock</div>
+    <div class="hint-text">✨ keep tapping</div>
+</div>
+
+<!-- ===== KEY MODAL ===== -->
+<div class="key-modal-overlay" id="keyModal">
+    <div class="key-modal">
+        <span class="key-icon">🗝️</span>
+        <h2>Enter the Key</h2>
+        <p>Click the key to unlock<br>the WebSwan app</p>
+        
+        <button class="key-btn" id="keyBtn">
+            <i class="fas fa-key"></i>
+        </button>
+        
+        <div class="key-progress">
+            <div class="key-progress-fill" id="keyProgress"></div>
+        </div>
+        <div class="key-status" id="keyStatus">🗝️ click the key</div>
+        <div class="key-hint">✨ keep clicking</div>
+    </div>
+</div>
+
+<!-- ===== MAIN APP (hidden until unlocked) ===== -->
+<div class="app-container" id="appContainer">
+    <div class="header">
+        <div class="swan-cloud-container"><span class="emoji-swan">🦢</span></div>
+        <h1>WebSwan Calendar, Task & Links</h1>
+        <p>All Your Tools in One Place</p>
+        <div class="header-search">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="linkSearchInput" placeholder="Search links…" autocomplete="off">
+            <div class="search-results-overlay" id="searchResultsOverlay"></div>
+        </div>
+    </div>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="social-tab">
+            <div class="social-section">
+                <div class="section-title"><i class="fas fa-link"></i>WebSwan Links Hub</div>
+                <div class="social-grid" id="socialGrid">
+                    
+                    <!-- 🦞 OPENCLAW BUTTON -->
+                    <a href="https://platform.claude.com/workspaces/default/workbench" target="_blank" class="social-card openclaw-card" style="background:linear-gradient(135deg,#1a1a2e,#16213e); border-color:#FF6B35;">
+                        <div class="social-icon"><i class="fas fa-paw"></i></div>
+                        <div class="social-name" style="color:#fff;">🦞 OpenClaw</div>
+                        <div class="social-desc" style="color:rgba(255,255,255,0.8);">Launch Claude Workbench 🚀</div>
+                    </a>
+
+                    <!-- ✨ NEW Avatar Ad Campaign Creator Card ✨ -->
+                    <a href="https://app.heygen.com/home" target="_blank" class="social-card avatar-ad-card">
+                        <div class="social-icon"><i class="fas fa-user-tie"></i></div>
+                        <div class="social-name">🎬 Avatar Ad Campaign Creator</div>
+                        <div class="social-desc">Create AI avatar ads & video campaigns 🎥</div>
+                    </a>
+
+                    <!-- ✨ NEW WebSwan Portfolio Card ✨ -->
+                    <a href="https://taniad2169.github.io/WebSwan-Portfolio/" target="_blank" class="social-card portfolio-card" style="background:linear-gradient(135deg,#0d1b3e,#1a3a6b);">
+                        <div class="social-icon" style="background:#f59e0b;"><i class="fas fa-briefcase"></i></div>
+                        <div class="social-name" style="color:#fff;">🦢 WebSwan Portfolio</div>
+                        <div class="social-desc" style="color:rgba(255,255,255,0.8);">View my work & projects ✨</div>
+                    </a>
+
+                    <!-- ✨ NEW WebSwan Broken Link Test Card -->
+                    <a href="https://taniad2169.github.io/Broken-Links/" target="_blank" class="social-card broken-link-test-card">
+                        <div class="social-icon"><i class="fas fa-link"></i></div>
+                        <div class="social-name">🔗 WebSwan Broken Link Test</div>
+                        <div class="social-desc">Find & fix broken links on your website 🛠️</div>
+                    </a>
+
+                    <!-- ✨ NEW WebSwan Language Gallery Card -->
+                    <a href="https://webswan-language-gallery.netlify.app/" target="_blank" class="social-card language-gallery-card">
+                        <div class="social-icon"><i class="fas fa-images"></i></div>
+                        <div class="social-name">🎨 WebSwan Language Gallery</div>
+                        <div class="social-desc">Visual language showcase & creative gallery 🖼️</div>
+                    </a>
+                    
+                    <!-- === STATES WEBSITE COMPLIANCE CARD === -->
+                    <a href="https://taniad2169.github.io/States-Website-Compliance/" target="_blank" class="social-card states-compliance-card">
+                        <div class="social-icon"><i class="fas fa-gavel"></i></div>
+                        <div class="social-name">⚖️ States Compliance</div>
+                        <div class="social-desc">Website compliance & legal standards ✅</div>
+                    </a>
+                    
+                    <!-- === BRAND NEW VIDEO CREATOR CARD === -->
+                    <a href="https://taniad2169.github.io/Digital-Solutions/" target="_blank" class="social-card video-creator-card">
+                        <div class="social-icon"><i class="fas fa-video"></i></div>
+                        <div class="social-name">🎬 Video Creator</div>
+                        <div class="social-desc">AI voiceover & slideshow studio — Pro Edition</div>
+                    </a>
+                    
+                    <!-- === NEW SWAN LANGUAGE CARD === -->
+                    <a href="https://swan-language.netlify.app" target="_blank" class="social-card swan-language-card">
+                        <div class="social-icon"><i class="fas fa-language"></i></div>
+                        <div class="social-name">🦢 Swan Language</div>
+                        <div class="social-desc">Translate & build your own dictionary 📖</div>
+                    </a>
+                    
+                    <!-- === NEW SWAN PRICING CARD === -->
+                    <a href="https://webswan-pricing-booking.netlify.app" target="_blank" class="social-card swan-pricing-card">
+                        <div class="social-icon"><i class="fas fa-tag"></i></div>
+                        <div class="social-name">💰 Swan Pricing</div>
+                        <div class="social-desc">WebSwan services pricing & booking 📋</div>
+                    </a>
+                    
+                    <!-- === NEW AIRBNB CARD === -->
+                    <a href="https://www.airbnb.com/" target="_blank" class="social-card airbnb-card">
+                        <div class="social-icon"><i class="fab fa-airbnb"></i></div>
+                        <div class="social-name">🏠 Airbnb</div>
+                        <div class="social-desc">Find unique stays & travel experiences 🌍</div>
+                    </a>
+                    
+                    <!-- === NEW EIN NUMBER BUTTON === -->
+                    <a href="https://sa.www4.irs.gov/applyein/einAssignment" target="_blank" class="social-card ein-number-card">
+                        <div class="social-icon"><i class="fas fa-id-card"></i></div>
+                        <div class="social-name">EIN Number</div>
+                        <div class="social-desc">Get your Employer ID Number from IRS 🔢</div>
+                    </a>
+                    
+                    <!-- Previously added EIN Application card -->
+                    <a href="https://sa.www4.irs.gov/applyein/legalStructure" target="_blank" class="social-card ein-card">
+                        <div class="social-icon"><i class="fas fa-file-invoice"></i></div>
+                        <div class="social-name">EIN Application (IRS)</div>
+                        <div class="social-desc">Apply for Employer ID Number 📄</div>
+                    </a>
+                    <a href="https://bizee.com/" target="_blank" class="social-card bizee-card">
+                        <div class="social-icon"><i class="fas fa-building"></i></div>
+                        <div class="social-name">Bizee</div>
+                        <div class="social-desc">Business formation & compliance 🚀</div>
+                    </a>
+                    <a href="https://taniad2169.github.io/Admin_admin/" target="_blank" class="social-card admin-card">
+                        <div class="social-icon"><i class="fas fa-user-shield"></i></div>
+                        <div class="social-name">Admin Dashboard</div>
+                        <div class="social-desc">Admin panel & management 🔐</div>
+                    </a>
+                    
+                    <!-- ALL PREVIOUS CARDS REMAIN INTACT BELOW -->
+                    <a href="https://www.coursera.org/" target="_blank" class="social-card coursera-card">
+                        <div class="social-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div class="social-name">Coursera Online Courses</div>
+                        <div class="social-desc">Top courses from leading universities & companies 📚</div>
+                    </a>
+                    <a href="https://real-estate-intake.netlify.app/" target="_blank" class="social-card real-estate-demo">
+                        <div class="social-icon"><i class="fas fa-building"></i></div>
+                        <div class="social-name">Real Estate Demo</div>
+                        <div class="social-desc">Property intake & mortgage calculator 🏠</div>
+                    </a>
+                    <a href="https://taniad2169.github.io/sudoku/" target="_blank" class="social-card sudoku-card"><div class="social-icon"><i class="fas fa-table"></i></div><div class="social-name">Sudoku Game</div><div class="social-desc">Play Sudoku puzzles 🧩</div></a>
+                    <a href="https://taniad2169.github.io/WebSwan-puzzle/" target="_blank" class="social-card puzzle-card"><div class="social-icon"><i class="fas fa-puzzle-piece"></i></div><div class="social-name">Word Puzzle Game</div><div class="social-desc">Find hidden words 🔍</div></a>
+                    <a href="https://taniad2169.github.io/MemoryG/" target="_blank" class="social-card memory-card"><div class="social-icon"><i class="fas fa-brain"></i></div><div class="social-name">Memory Game</div><div class="social-desc">Test your memory 🧠</div></a>
+                    <a href="https://github.com/" target="_blank" class="social-card github-card"><div class="social-icon"><i class="fab fa-github"></i></div><div class="social-name">GitHub</div><div class="social-desc">Code repository & collaboration</div></a>
+                    <a href="https://app.surferseo.com/workspace/1321438/billing/subscription/plans" target="_blank" class="social-card surfer-seo"><div class="social-icon"><i class="fas fa-search"></i></div><div class="social-name">Surfer SEO</div><div class="social-desc">Workspace & optimization tool</div></a>
+                    <a href="https://s15097.usc1.stableserver.net:2096/cpsess2143863910/3rdparty/roundcube/?_task=mail&_mbox=INBOX" target="_blank" class="social-card business-email"><div class="social-icon"><i class="fas fa-envelope"></i></div><div class="social-name">The WebSwan Business Email</div><div class="social-desc">Access WebSwan mail & inbox</div></a>
+                    <a href="https://s15097.usc1.stableserver.net:2083/cpsess7190954221/frontend/jupiter/email_accounts/index.html#/list" target="_blank" class="social-card cpanel-card"><div class="social-icon"><i class="fas fa-server"></i></div><div class="social-name">cPanel</div><div class="social-desc">Manage email accounts & hosting</div></a>
+                    <a href="https://codepen.io/trending" target="_blank" class="social-card codepen-link"><div class="social-icon"><i class="fab fa-codepen"></i></div><div class="social-name">CodePen for Web Developer</div><div class="social-desc">Trending HTML/CSS/JS snippets & live code playground</div></a>
+                    <a href="https://webswan-genesis.netlify.app/" target="_blank" class="social-card genesis-new"><div class="social-icon"><i class="fas fa-feather-alt"></i></div><div class="social-name">WebSwan Genesis</div><div class="social-desc">Genesis Intake & Collaboration Platform</div></a>
+                    <a href="https://webswan-invoice.netlify.app/" target="_blank" class="social-card invoice"><div class="social-icon"><i class="fas fa-file-invoice-dollar"></i></div><div class="social-name">WebSwan Invoice</div><div class="social-desc">Professional invoice generator</div></a>
+                    <a href="https://taniad2169.github.io/cookie_link/" target="_blank" class="social-card cookie-secret"><div class="social-icon"><i class="fas fa-cookie"></i></div><div class="social-name">Cookie Widget Secret</div><div class="social-desc">7-click secret access</div></a>
+                    <a href="https://taniad2169.github.io/WebSwan-Cookie-Tester/" target="_blank" class="social-card cookie-tester"><div class="social-icon"><i class="fas fa-cookie-bite"></i></div><div class="social-name">Cookie Tester</div><div class="social-desc">Cookie & accessibility tester</div></a>
+                    <a href="https://app.dataannotation.tech/me?smti%5B%5D=142179&smti%5B%5D=149542&smti%5B%5D=118695" target="_blank" class="social-card dataannotation"><div class="social-icon"><i class="fas fa-brain"></i></div><div class="social-name">DataAnnotation</div><div class="social-desc">AI training platform</div></a>
+                    <a href="https://taniad2169.github.io/WebSwan-Web-Analysis/" target="_blank" class="social-card web-analysis"><div class="social-icon"><i class="fas fa-chart-line"></i></div><div class="social-name">Web Analysis</div><div class="social-desc">Website analysis tools</div></a>
+                    <a href="https://taniad2169.github.io/WS-Analysis-Result/" target="_blank" class="social-card web-analysis-result"><div class="social-icon"><i class="fas fa-file-alt"></i></div><div class="social-name">Analysis Result</div><div class="social-desc">Detailed reports</div></a>
+                    <a href="https://brokenlinkcheck.com/" target="_blank" class="social-card broken-link"><div class="social-icon"><i class="fas fa-unlink"></i></div><div class="social-name">Broken Link Checker</div><div class="social-desc">Check broken links</div></a>
+                    <a href="https://manage.multisiteadmin.com/sites" target="_blank" class="social-card multisite-builder"><div class="social-icon"><i class="fas fa-sitemap"></i></div><div class="social-name">Multisite Builder</div><div class="social-desc">Website management</div></a>
+                    <a href="https://chat.deepseek.com/a/chat/s/3ebed916-6590-4a90-9f67-07738a685aa6" target="_blank" class="social-card deepseek-chat"><div class="social-icon"><i class="fas fa-robot"></i></div><div class="social-name">DeepSeek Chat</div><div class="social-desc">AI Assistant</div></a>
+                    <a href="https://travel-pwa.netlify.app/" target="_blank" class="social-card travel-pwa"><div class="social-icon"><i class="fas fa-plane"></i></div><div class="social-name">Travel PWA</div><div class="social-desc">Travel booking app</div></a>
+                    <a href="https://manage.multisiteadmin.com/lead_generator?search%5Bkeyword%5D=tax+prepare+&search%5Blocation%5D=brooklyn+ny&search%5Bradius%5D=20&commit=Search" target="_blank" class="social-card prospect-tools"><div class="social-icon"><i class="fas fa-binoculars"></i></div><div class="social-name">Prospect Tools</div><div class="social-desc">Lead generation</div></a>
+                    <a href="https://g.page/r/CRAvRwiuRifhEAE/review" target="_blank" class="social-card google-link-review"><div class="social-icon"><i class="fab fa-google"></i></div><div class="social-name">Google Review Link</div><div class="social-desc">Leave a review</div></a>
+                    <a href="https://capable-speculoos-838831.netlify.app/" target="_blank" class="social-card genesis"><div class="social-icon"><i class="fas fa-feather-alt"></i></div><div class="social-name">Genesis (Legacy)</div><div class="social-desc">Legacy platform</div></a>
+                    <a href="https://genuine-kulfi-e86073.netlify.app/" target="_blank" class="social-card affiliate-links"><div class="social-icon"><i class="fas fa-handshake"></i></div><div class="social-name">Affiliate Links</div><div class="social-desc">Partnerships</div></a>
+                    <a href="https://www.google.com/search?q=price+for+pwa+phone+app+for+service+businesses+only" target="_blank" class="social-card pwa-price"><div class="social-icon"><i class="fas fa-search-dollar"></i></div><div class="social-name">PWA Market Price</div><div class="social-desc">Pricing info</div></a>
+                    <a href="https://www.google.com/search?q=ad+campaign+marketing+video+pricing" target="_blank" class="social-card ad-campaign-price"><div class="social-icon"><i class="fas fa-ad"></i></div><div class="social-name">Ad Campaign Price</div><div class="social-desc">Video pricing</div></a>
+                    <a href="https://g.page/r/CbBEXbMJejwTEBM/review" target="_blank" class="social-card google-review"><div class="social-icon"><i class="fab fa-google"></i></div><div class="social-name">WebSwan Digital Reviews</div><div class="social-desc">Leave review</div></a>
+                    <a href="https://taniad2169.github.io/WebSwan-CRM-GoogleSheet/" target="_blank" class="social-card crm"><div class="social-icon"><i class="fas fa-database"></i></div><div class="social-name">CRM System</div><div class="social-desc">Google Sheets CRM</div></a>
+                    <a href="https://www.upwork.com/nx/find-work/best-matches/" target="_blank" class="social-card upwork"><div class="social-icon"><i class="fas fa-briefcase"></i></div><div class="social-name">Upwork</div><div class="social-desc">Freelance work</div></a>
+                    <a href="https://www.linkedin.com/in/tania-domingue-882a68282/" target="_blank" class="social-card linkedin"><div class="social-icon"><i class="fab fa-linkedin"></i></div><div class="social-name">LinkedIn</div><div class="social-desc">Professional profile</div></a>
+                    <a href="https://www.instagram.com/motivationalll_speaker/" target="_blank" class="social-card instagram"><div class="social-icon"><i class="fab fa-instagram"></i></div><div class="social-name">Instagram</div><div class="social-desc">Motivational speaker</div></a>
+                    <a href="https://www.youtube.com/@TaniaDomingue" target="_blank" class="social-card youtube-channel"><div class="social-icon"><i class="fab fa-youtube"></i></div><div class="social-name">YouTube Channel</div><div class="social-desc">@TaniaDomingue</div></a>
+                    <a href="https://youtu.be/z4L_hzXmQRA?si=S0lX3XWesfcqqNM5" target="_blank" class="social-card meet-founder"><div class="social-icon"><i class="fas fa-user-circle"></i></div><div class="social-name">Meet the Founder</div><div class="social-desc">Intro video</div></a>
+                    <a href="https://www.webswanmedianetwork.com" target="_blank" class="social-card webswan-network"><div class="social-icon"><i class="fas fa-network-wired"></i></div><div class="social-name">WebSwan Media</div><div class="social-desc">Media network</div></a>
+                    <a href="https://www.webswandigitalsolutions.com" target="_blank" class="social-card webswan-digital"><div class="social-icon"><i class="fas fa-laptop-code"></i></div><div class="social-name">WebSwan Digital</div><div class="social-desc">Digital solutions</div></a>
+                    <a href="https://taniad2169.github.io/WebSwan-Design/" target="_blank" class="social-card" style="background:linear-gradient(135deg,#14395d,#1e4d7a);"><div class="social-icon" style="background:#5bd1e3;"><i class="fas fa-cut"></i></div><div class="social-name" style="color:#fff;">WebSwan Haute Couture</div><div class="social-desc" style="color:rgba(255,255,255,0.8);">Bespoke design intake form</div></a>
+                    <a href="https://taniad2169.github.io/WebSwan-Da-Gigoia/" target="_blank" class="social-card" style="background:linear-gradient(135deg,#1a1a2e,#16213e);"><div class="social-icon" style="background:#e91e63;"><i class="fas fa-store"></i></div><div class="social-name" style="color:#fff;">WebSwan Da Gigoia</div><div class="social-desc" style="color:rgba(255,255,255,0.8);">Da Gigoia intake & services</div></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane" id="calendar-tab">
+            <div style="height:100%; display:flex; flex-direction:column; background:white;">
+                <div class="calendar-nav">
+                    <button class="nav-btn" id="prevMonth"><i class="fas fa-chevron-left"></i></button>
+                    <div class="current-month" id="currentMonth">March 2026</div>
+                    <button class="nav-btn" id="nextMonth"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="calendar">
+                    <div class="weekdays"><div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div></div>
+                    <div class="days-grid" id="calendarGrid"></div>
+                </div>
+                <div style="padding:20px; background:rgba(166,247,245,0.1); border-top:1px solid rgba(151,240,235,0.3);">
+                    <div class="section-title" style="margin-bottom:15px;"><i class="fas fa-tasks"></i>Today's Tasks</div>
+                    <div id="todayTasks"><div class="empty-state"><i class="fas fa-tasks"></i><p>No tasks for today</p></div></div>
+                    <button id="addTaskTodayBtn" style="width:100%; margin-top:15px; padding:12px; background:linear-gradient(135deg, var(--primary-dark), var(--primary-light)); color:white; border:none; border-radius:10px; font-weight:600; cursor:pointer;"><i class="fas fa-plus"></i> Add Task for Today</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane" id="settings-tab">
+            <div class="social-section">
+                <div class="section-title"><i class="fas fa-cog"></i>App Settings</div>
+                <div class="social-grid">
+                    <div class="social-card"><div class="social-icon" style="background:var(--genesis-new);"><i class="fas fa-feather-alt"></i></div><div class="social-name">WebSwan Genesis</div><div class="social-desc">Genesis platform</div><button class="btn btn-primary" style="margin-top:10px; width:100%;" onclick="copyLink('genesisNew')">Copy Link</button></div>
+                    <div class="social-card"><div class="social-icon" style="background:var(--invoice);"><i class="fas fa-file-invoice-dollar"></i></div><div class="social-name">WebSwan Invoice</div><button class="btn btn-primary" style="margin-top:10px;" onclick="copyLink('invoice')">Copy Link</button></div>
+                </div>
+                <div class="copy-links-section">
+                    <div class="section-title"><i class="fas fa-copy"></i>Copy Links</div>
+                    <div class="copy-link-card"><div class="copy-link-header"><div class="copy-link-icon" style="background:var(--codepen-link);"><i class="fab fa-codepen"></i></div><div class="copy-link-title">CodePen Trending</div></div><div class="copy-link-content"><div class="link-display" id="codepenTrendingLink">https://codepen.io/trending</div><button class="copy-link-btn" onclick="copyLink('codepenTrending')"><i class="fas fa-copy"></i> Copy</button></div></div>
+                    <div class="copy-link-card"><div class="copy-link-header"><div class="copy-link-icon" style="background:var(--sudoku-color);"><i class="fas fa-table"></i></div><div class="copy-link-title">Sudoku Game</div></div><div class="copy-link-content"><div class="link-display" id="sudokuLink">https://taniad2169.github.io/sudoku/</div><button class="copy-link-btn" onclick="copyLink('sudoku')"><i class="fas fa-copy"></i> Copy</button></div></div>
+                    <div class="copy-link-card"><div class="copy-link-header"><div class="copy-link-icon" style="background:var(--puzzle-color);"><i class="fas fa-puzzle-piece"></i></div><div class="copy-link-title">Word Puzzle Game</div></div><div class="copy-link-content"><div class="link-display" id="puzzleLink">https://taniad2169.github.io/WebSwan-puzzle/</div><button class="copy-link-btn" onclick="copyLink('puzzle')"><i class="fas fa-copy"></i> Copy</button></div></div>
+                    <div class="copy-link-card"><div class="copy-link-header"><div class="copy-link-icon" style="background:var(--memory-color);"><i class="fas fa-brain"></i></div><div class="copy-link-title">Memory Game</div></div><div class="copy-link-content"><div class="link-display" id="memoryLink">https://taniad2169.github.io/MemoryG/</div><button class="copy-link-btn" onclick="copyLink('memory')"><i class="fas fa-copy"></i> Copy</button></div></div>
+                    <div class="copy-link-card"><div class="copy-link-header"><div class="copy-link-icon" style="background:var(--github-color);"><i class="fab fa-github"></i></div><div class="copy-link-title">GitHub</div></div><div class="copy-link-content"><div class="link-display" id="githubLink">https://github.com/</div><button class="copy-link-btn" onclick="copyLink('github')"><i class="fas fa-copy"></i> Copy</button></div></div>
+                </div>
+                <button id="editLinksBtn" class="btn btn-primary" style="margin:20px;">Edit All Links</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div>WebSwan Digital Hub © 2024</div>
+        <div class="footer-nav">
+            <button class="footer-btn active" data-tab="social-tab"><i class="fas fa-link"></i><span class="btn-label">Links</span></button>
+            <button class="footer-btn" data-tab="calendar-tab"><i class="fas fa-calendar-alt"></i><span class="btn-label">Calendar</span></button>
+            <button class="footer-btn" data-tab="settings-tab"><i class="fas fa-cog"></i><span class="btn-label">Settings</span></button>
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+<div class="modal" id="taskModal"><div class="modal-content"><div class="modal-header"><div class="modal-title">Add Task</div><button class="close-btn" id="closeModal"><i class="fas fa-times"></i></button></div><form id="taskForm"><div class="form-group"><label>Title</label><input type="text" id="taskTitle" required></div><div class="form-group"><label>Date</label><input type="date" id="taskDate"></div><div class="form-actions"><button type="button" id="cancelTask">Cancel</button><button type="submit">Save</button></div></form></div></div>
+<div class="modal" id="linkModal"><div class="modal-content"><div class="modal-header"><div class="modal-title">Edit Links</div><button class="close-btn" id="closeLinkModal"><i class="fas fa-times"></i></button></div><div><div class="form-group"><label>CodePen Trending URL</label><input type="url" id="codepenTrendingUrl" value="https://codepen.io/trending"></div><div class="form-group"><label>WebSwan Genesis URL</label><input type="url" id="genesisNewUrl"></div></div><div class="form-actions"><button id="saveAllLinks">Save All</button><button id="cancelLinkEdit">Cancel</button></div></div></div>
+
+<script>
+// ========== LOCK SCREEN LOGIC ==========
+let lockClicks = 0;
+const LOCK_TARGET = 7;
+let keyClicks = 0;
+const KEY_TARGET = 3;
+
+const lockScreen = document.getElementById('lockScreen');
+const lockBtn = document.getElementById('lockBtn');
+const lockProgress = document.getElementById('lockProgress');
+const lockStatus = document.getElementById('lockStatus');
+
+const keyModal = document.getElementById('keyModal');
+const keyBtn = document.getElementById('keyBtn');
+const keyProgress = document.getElementById('keyProgress');
+const keyStatus = document.getElementById('keyStatus');
+
+const appContainer = document.getElementById('appContainer');
+
+// Lock button clicks
+lockBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    lockClicks++;
+    if (lockClicks > LOCK_TARGET) lockClicks = LOCK_TARGET;
+    
+    // Update UI - progress bar only
+    const percent = (lockClicks / LOCK_TARGET) * 100;
+    lockProgress.style.width = percent + '%';
+    
+    // Update status text
+    if (lockClicks < LOCK_TARGET) {
+        lockStatus.textContent = '🔒 tap to unlock';
+    } else {
+        lockStatus.textContent = '🔓 unlocking...';
+    }
+    
+    // Haptic feedback
+    this.style.transform = 'scale(0.92)';
+    setTimeout(() => { this.style.transform = ''; }, 150);
+    
+    // Vibrate if supported
+    if (navigator.vibrate) navigator.vibrate(10);
+    
+    // Check if unlocked
+    if (lockClicks >= LOCK_TARGET) {
+        // Lock is fully clicked - show key modal
+        setTimeout(() => {
+            lockScreen.style.opacity = '0';
+            setTimeout(() => {
+                lockScreen.style.display = 'none';
+                keyModal.classList.add('active');
+                // Reset key clicks
+                keyClicks = 0;
+                keyProgress.style.width = '0%';
+                keyStatus.textContent = '🗝️ click the key';
+            }, 400);
+        }, 200);
+    }
+});
+
+// Key button clicks
+keyBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    keyClicks++;
+    if (keyClicks > KEY_TARGET) keyClicks = KEY_TARGET;
+    
+    // Update UI - progress bar only
+    const percent = (keyClicks / KEY_TARGET) * 100;
+    keyProgress.style.width = percent + '%';
+    
+    // Update status text
+    if (keyClicks < KEY_TARGET) {
+        keyStatus.textContent = '🗝️ click the key';
+    } else {
+        keyStatus.textContent = '🔓 unlocking...';
+    }
+    
+    // Haptic feedback
+    this.style.transform = 'scale(0.92)';
+    setTimeout(() => { this.style.transform = ''; }, 150);
+    
+    if (navigator.vibrate) navigator.vibrate(10);
+    
+    // Check if fully clicked
+    if (keyClicks >= KEY_TARGET) {
+        // UNLOCK THE APP!
+        setTimeout(() => {
+            keyModal.classList.remove('active');
+            appContainer.style.display = 'flex';
+            appContainer.classList.add('loaded');
+            // Initialize the app
+            initApp();
+            // Show welcome notification
+            setTimeout(() => showNotification('🔓 Welcome to WebSwan!'), 500);
+        }, 300);
+    }
+});
+
+// ========== ORIGINAL APP FUNCTIONS ==========
+let currentDate = new Date();
+let selectedDate = new Date();
+let tasks = {};
+let customLinks = [];
+
+function showNotification(msg) { let toast = document.createElement('div'); toast.className = 'notification-toast'; toast.textContent = msg; document.body.appendChild(toast); setTimeout(() => toast.remove(), 2500); }
+function saveTasks() { localStorage.setItem('webswanTasks', JSON.stringify(tasks)); }
+function loadTasks() { let saved = localStorage.getItem('webswanTasks'); if(saved) tasks = JSON.parse(saved); else tasks = {}; }
+
+function renderCalendar() {
+    let grid = document.getElementById('calendarGrid');
+    let monthEl = document.getElementById('currentMonth');
+    if(!grid) return;
+    monthEl.textContent = currentDate.toLocaleDateString('en-US', { month:'long', year:'numeric' });
+    grid.innerHTML = '';
+    let year = currentDate.getFullYear(), month = currentDate.getMonth();
+    let firstDay = new Date(year, month, 1).getDay();
+    let daysInMonth = new Date(year, month+1, 0).getDate();
+    let prevDays = new Date(year, month, 0).getDate();
+    let today = new Date();
+    for(let i=firstDay-1; i>=0; i--) { let d = document.createElement('div'); d.className = 'day other-month'; d.textContent = prevDays - i; grid.appendChild(d); }
+    for(let i=1; i<=daysInMonth; i++) {
+        let d = document.createElement('div'); d.className = 'day'; d.innerHTML = `<div class="day-number">${i}</div>`;
+        let dateObj = new Date(year, month, i);
+        if(dateObj.toDateString() === today.toDateString()) d.classList.add('today');
+        if(dateObj.toDateString() === selectedDate.toDateString()) d.classList.add('selected');
+        let key = `${year}-${month+1}-${i}`;
+        if(tasks[key] && tasks[key].length) { let dot = document.createElement('div'); dot.className = 'task-dot'; d.appendChild(dot); }
+        d.addEventListener('click', (function(dt){ return function(){ selectDate(dt); }; })(dateObj));
+        grid.appendChild(d);
+    }
+    let totalCells = 42; let remaining = totalCells - (firstDay + daysInMonth);
+    for(let i=1; i<=remaining; i++) { let d = document.createElement('div'); d.className = 'day other-month'; d.textContent = i; grid.appendChild(d); }
+    updateTodayTasks();
+}
+function selectDate(date) { selectedDate = date; renderCalendar(); }
+function prevMonth() { currentDate.setMonth(currentDate.getMonth()-1); renderCalendar(); }
+function nextMonth() { currentDate.setMonth(currentDate.getMonth()+1); renderCalendar(); }
+function updateTodayTasks() {
+    let container = document.getElementById('todayTasks');
+    if(!container) return;
+    let key = `${selectedDate.getFullYear()}-${selectedDate.getMonth()+1}-${selectedDate.getDate()}`;
+    let dayTasks = tasks[key] || [];
+    if(dayTasks.length===0) { container.innerHTML = '<div class="empty-state"><i class="fas fa-tasks"></i><p>No tasks for today</p></div>'; return; }
+    container.innerHTML = dayTasks.map((t,idx)=>`<div style="background:white; border-radius:10px; padding:12px; margin-bottom:8px; display:flex; justify-content:space-between;"><div><strong>${escapeHtml(t.title)}</strong>${t.time?`<div style="font-size:12px;">${t.time}</div>`:''}</div><button onclick="deleteTask('${key}',${idx})" style="background:none; border:none; color:#ef4444; cursor:pointer;"><i class="fas fa-trash"></i></button></div>`).join('');
+}
+function addTaskForToday() { document.getElementById('taskDate').value = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth()+1).padStart(2,'0')}-${String(selectedDate.getDate()).padStart(2,'0')}`; document.getElementById('taskModal').classList.add('active'); }
+function addTask(e) { e.preventDefault(); let title = document.getElementById('taskTitle').value.trim(); let date = document.getElementById('taskDate').value; if(!title||!date) return; let [year,month,day]=date.split('-'); let key=`${year}-${parseInt(month)}-${parseInt(day)}`; if(!tasks[key]) tasks[key]=[]; tasks[key].push({title, time:'', id:Date.now()}); saveTasks(); renderCalendar(); document.getElementById('taskModal').classList.remove('active'); showNotification('✅ Task added'); }
+function deleteTask(key,idx) { if(confirm('Delete?')){ tasks[key].splice(idx,1); if(tasks[key].length===0) delete tasks[key]; saveTasks(); renderCalendar(); showNotification('Deleted'); } }
+function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+
+function copyLink(type) {
+    let urls = { 
+        codepenTrending: document.getElementById('codepenTrendingLink')?.textContent || 'https://codepen.io/trending',
+        genesisNew: 'https://webswan-genesis.netlify.app/', 
+        invoice: 'https://webswan-invoice.netlify.app/',
+        sudoku: 'https://taniad2169.github.io/sudoku/',
+        puzzle: 'https://taniad2169.github.io/WebSwan-puzzle/',
+        memory: 'https://taniad2169.github.io/MemoryG/',
+        github: 'https://github.com/'
+    };
+    let link = urls[type] || '';
+    navigator.clipboard.writeText(link).then(()=>{ showNotification('✓ Link copied!'); }).catch(()=>{ showNotification('❌ Copy failed'); });
+}
+
+function initApp() {
+    loadTasks(); renderCalendar();
+    document.getElementById('prevMonth').onclick = prevMonth;
+    document.getElementById('nextMonth').onclick = nextMonth;
+    document.getElementById('addTaskTodayBtn').onclick = addTaskForToday;
+    document.getElementById('taskForm').onsubmit = addTask;
+    document.getElementById('closeModal').onclick = ()=>document.getElementById('taskModal').classList.remove('active');
+    document.getElementById('cancelTask').onclick = ()=>document.getElementById('taskModal').classList.remove('active');
+    document.getElementById('editLinksBtn').onclick = ()=>{ document.getElementById('linkModal').classList.add('active'); };
+    document.getElementById('closeLinkModal').onclick = ()=>document.getElementById('linkModal').classList.remove('active');
+    document.getElementById('cancelLinkEdit').onclick = ()=>document.getElementById('linkModal').classList.remove('active');
+    document.getElementById('saveAllLinks').onclick = ()=>{ let newUrl = document.getElementById('codepenTrendingUrl').value; if(newUrl) document.getElementById('codepenTrendingLink').textContent = newUrl; document.querySelector('.codepen-link').href = newUrl; showNotification('Links updated'); document.getElementById('linkModal').classList.remove('active'); };
+    document.querySelectorAll('.footer-btn').forEach(btn=>{ btn.onclick = ()=>{ document.querySelectorAll('.footer-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active')); document.getElementById(btn.dataset.tab).classList.add('active'); if(btn.dataset.tab==='calendar-tab') renderCalendar(); }; });
+    
+    // Search functionality
+    let searchInput = document.getElementById('linkSearchInput');
+    let overlay = document.getElementById('searchResultsOverlay');
+    searchInput.addEventListener('input', function() {
+        let raw = this.value.trim();
+        if(!raw) { overlay.classList.remove('visible'); overlay.innerHTML=''; return; }
+        let q = raw.toLowerCase().replace(/webswan/gi, 'webswan');
+        let items = Array.from(document.querySelectorAll('.social-card')).filter(card=>{
+            let nameEl = card.querySelector('.social-name');
+            let descEl = card.querySelector('.social-desc');
+            let name = (nameEl ? (nameEl.innerText || nameEl.textContent) : '').toLowerCase().replace(/webswan/gi, 'webswan');
+            let desc = (descEl ? (descEl.innerText || descEl.textContent) : '').toLowerCase();
+            return name.includes(q) || desc.includes(q);
+        });
+        if(items.length===0) overlay.innerHTML='<div class="search-no-results" style="padding:12px; text-align:center;">No results</div>';
+        else overlay.innerHTML = items.map(c=>{
+            let nameEl = c.querySelector('.social-name');
+            let descEl = c.querySelector('.social-desc');
+            let iconEl = c.querySelector('.social-icon i');
+            let name = nameEl ? (nameEl.innerText || nameEl.textContent) : '';
+            let desc = descEl ? (descEl.innerText || descEl.textContent) : '';
+            let icon = iconEl ? iconEl.className : 'fas fa-link';
+            let href = c.href || '#';
+            return '<a class="search-result-item" href="' + href + '" target="_blank" style="display:flex; align-items:center; gap:10px; padding:10px; text-decoration:none; color:inherit; border-bottom:1px solid #eee;"><div class="search-result-icon" style="width:32px;height:32px;border-radius:8px;background:#162c63;display:flex;align-items:center;justify-content:center;color:white;"><i class="' + icon + '"></i></div><div><strong>' + name + '</strong><div style="font-size:12px; color:#666;">' + desc + '</div></div></a>';
+        }).join('');
+        overlay.classList.add('visible');
+    });
+    document.addEventListener('click',(e)=>{ if(!document.querySelector('.header-search')?.contains(e.target)) overlay.classList.remove('visible'); });
+}
+window.deleteTask = deleteTask; window.copyLink = copyLink;
+
+// Don't auto-init - wait for unlock!
+</script>
+</body>
+</html>
