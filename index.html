@@ -89,6 +89,7 @@
             --portfolio-color: #f59e0b;
             --avatar-ad-color: #FF6B6B;
             --openclaw-color: #FF6B35;
+            --claude-desktop-color: #D97706;
         }
         
         body { 
@@ -475,6 +476,7 @@
         .social-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
         
         .social-card.openclaw-card::before { background: var(--openclaw-color); }
+        .social-card.claude-desktop-card::before { background: var(--claude-desktop-color); }
         .social-card.portfolio-card::before { background: var(--portfolio-color); }
         .social-card.broken-link-test-card::before { background: var(--broken-link-test); }
         .social-card.states-compliance-card::before { background: var(--states-compliance-color); }
@@ -554,6 +556,7 @@
         }
         
         .social-card.openclaw-card .social-icon { background: var(--openclaw-color); }
+        .social-card.claude-desktop-card .social-icon { background: var(--claude-desktop-color); }
         .social-card.portfolio-card .social-icon { background: var(--portfolio-color); }
         .social-card.broken-link-test-card .social-icon { background: var(--broken-link-test); }
         .social-card.states-compliance-card .social-icon { background: var(--states-compliance-color); }
@@ -733,6 +736,13 @@
                         <div class="social-icon"><i class="fas fa-paw"></i></div>
                         <div class="social-name" style="color:#fff;">🦞 OpenClaw</div>
                         <div class="social-desc" style="color:rgba(255,255,255,0.8);">Launch Claude Workbench 🚀</div>
+                    </a>
+
+                    <!-- 🖥️ CLAUDE AI DESKTOP BUTTON - NEW -->
+                    <a href="https://claude.ai/desktop/connected/chat/3b654584-5789-4828-8032-efd3147687e8?installed_from_directory=true&mcp_auth_source=connector_directory&server=11473af4-55be-4953-bb71-9e0fbdc73eaf&step=success" target="_blank" class="social-card claude-desktop-card" style="background:linear-gradient(135deg,#1a1a2e,#16213e); border-color:#D97706;">
+                        <div class="social-icon"><i class="fas fa-desktop"></i></div>
+                        <div class="social-name" style="color:#fff;">💻 ClaudeAI Desktop</div>
+                        <div class="social-desc" style="color:rgba(255,255,255,0.8);">Claude Desktop Connected Chat ⚡</div>
                     </a>
 
                     <!-- ✨ NEW Avatar Ad Campaign Creator Card ✨ -->
