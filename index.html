@@ -90,6 +90,8 @@
             --avatar-ad-color: #FF6B6B;
             --openclaw-color: #FF6B35;
             --claude-desktop-color: #D97706;
+            --openclaw-infra-color: #FF4500;
+            --google-gemini-color: #4285F4;
         }
         
         body { 
@@ -477,6 +479,8 @@
         
         .social-card.openclaw-card::before { background: var(--openclaw-color); }
         .social-card.claude-desktop-card::before { background: var(--claude-desktop-color); }
+        .social-card.openclaw-infra-card::before { background: var(--openclaw-infra-color); }
+        .social-card.google-gemini-card::before { background: var(--google-gemini-color); }
         .social-card.portfolio-card::before { background: var(--portfolio-color); }
         .social-card.broken-link-test-card::before { background: var(--broken-link-test); }
         .social-card.states-compliance-card::before { background: var(--states-compliance-color); }
@@ -557,6 +561,8 @@
         
         .social-card.openclaw-card .social-icon { background: var(--openclaw-color); }
         .social-card.claude-desktop-card .social-icon { background: var(--claude-desktop-color); }
+        .social-card.openclaw-infra-card .social-icon { background: var(--openclaw-infra-color); }
+        .social-card.google-gemini-card .social-icon { background: var(--google-gemini-color); }
         .social-card.portfolio-card .social-icon { background: var(--portfolio-color); }
         .social-card.broken-link-test-card .social-icon { background: var(--broken-link-test); }
         .social-card.states-compliance-card .social-icon { background: var(--states-compliance-color); }
@@ -738,35 +744,49 @@
                         <div class="social-desc" style="color:rgba(255,255,255,0.8);">Launch Claude Workbench 🚀</div>
                     </a>
 
-                    <!-- 🖥️ CLAUDE AI DESKTOP BUTTON - NEW -->
+                    <!-- 🖥️ CLAUDE AI DESKTOP BUTTON -->
                     <a href="https://claude.ai/desktop/connected/chat/3b654584-5789-4828-8032-efd3147687e8?installed_from_directory=true&mcp_auth_source=connector_directory&server=11473af4-55be-4953-bb71-9e0fbdc73eaf&step=success" target="_blank" class="social-card claude-desktop-card" style="background:linear-gradient(135deg,#1a1a2e,#16213e); border-color:#D97706;">
                         <div class="social-icon"><i class="fas fa-desktop"></i></div>
                         <div class="social-name" style="color:#fff;">💻 ClaudeAI Desktop</div>
                         <div class="social-desc" style="color:rgba(255,255,255,0.8);">Claude Desktop Connected Chat ⚡</div>
                     </a>
 
-                    <!-- ✨ NEW Avatar Ad Campaign Creator Card ✨ -->
+                    <!-- 🔧 OPENCLAW INFRASTRUCTURE BUTTON (NEW) -->
+                    <a href="http://127.0.0.1:18789/settings/infrastructure" target="_blank" class="social-card openclaw-infra-card" style="background:linear-gradient(135deg,#1a1a2e,#16213e); border-color:#FF4500;">
+                        <div class="social-icon"><i class="fas fa-server"></i></div>
+                        <div class="social-name" style="color:#fff;">🔧 OpenClaw Infrastructure</div>
+                        <div class="social-desc" style="color:rgba(255,255,255,0.8);">OpenClaw Settings & Infrastructure ⚙️</div>
+                    </a>
+
+                    <!-- 🤖 GOOGLE GEMINI API BUTTON (NEW) -->
+                    <a href="https://aistudio.google.com/api-keys?project=gen-lang-client-0441275524" target="_blank" class="social-card google-gemini-card" style="background:linear-gradient(135deg,#1a1a2e,#16213e); border-color:#4285F4;">
+                        <div class="social-icon"><i class="fas fa-robot"></i></div>
+                        <div class="social-name" style="color:#fff;">🤖 Google Gemini API</div>
+                        <div class="social-desc" style="color:rgba(255,255,255,0.8);">Gemini API Keys & AI Studio 🔑</div>
+                    </a>
+
+                    <!-- ✨ Avatar Ad Campaign Creator Card -->
                     <a href="https://app.heygen.com/home" target="_blank" class="social-card avatar-ad-card">
                         <div class="social-icon"><i class="fas fa-user-tie"></i></div>
                         <div class="social-name">🎬 Avatar Ad Campaign Creator</div>
                         <div class="social-desc">Create AI avatar ads & video campaigns 🎥</div>
                     </a>
 
-                    <!-- ✨ NEW WebSwan Portfolio Card ✨ -->
+                    <!-- ✨ WebSwan Portfolio Card -->
                     <a href="https://taniad2169.github.io/WebSwan-Portfolio/" target="_blank" class="social-card portfolio-card" style="background:linear-gradient(135deg,#0d1b3e,#1a3a6b);">
                         <div class="social-icon" style="background:#f59e0b;"><i class="fas fa-briefcase"></i></div>
                         <div class="social-name" style="color:#fff;">🦢 WebSwan Portfolio</div>
                         <div class="social-desc" style="color:rgba(255,255,255,0.8);">View my work & projects ✨</div>
                     </a>
 
-                    <!-- ✨ NEW WebSwan Broken Link Test Card -->
+                    <!-- ✨ WebSwan Broken Link Test Card -->
                     <a href="https://taniad2169.github.io/Broken-Links/" target="_blank" class="social-card broken-link-test-card">
                         <div class="social-icon"><i class="fas fa-link"></i></div>
                         <div class="social-name">🔗 WebSwan Broken Link Test</div>
                         <div class="social-desc">Find & fix broken links on your website 🛠️</div>
                     </a>
 
-                    <!-- ✨ NEW WebSwan Language Gallery Card -->
+                    <!-- ✨ WebSwan Language Gallery Card -->
                     <a href="https://webswan-language-gallery.netlify.app/" target="_blank" class="social-card language-gallery-card">
                         <div class="social-icon"><i class="fas fa-images"></i></div>
                         <div class="social-name">🎨 WebSwan Language Gallery</div>
